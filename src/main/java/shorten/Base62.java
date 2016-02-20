@@ -1,5 +1,10 @@
 package shorten;
 
+/**
+ * Cribbed from: https://github.com/dukky/Base62
+ *
+ */
+
 /*******************************************************************************
  * Copyright 2013 Andreas Holley
  *
