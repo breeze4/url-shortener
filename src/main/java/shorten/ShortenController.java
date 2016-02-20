@@ -13,6 +13,8 @@ public class ShortenController {
         this.service = service;
         this.om = om;
 
+        // TODO: turn this into a JsonResponseTransformer
+        // https://github.com/perwendel/spark
         Spark.post(BASE_URL + "/", (req, res) -> {
             String body = req.body();
             ShortenRequest request = om.readerFor(ShortenRequest.class).readValue(body);

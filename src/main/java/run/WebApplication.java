@@ -1,7 +1,11 @@
 package run;
 
+import config.DatabaseConfig;
 import config.InjectionConfig;
+import config.PropertiesConfig;
 import spark.Spark;
+
+import java.util.Properties;
 
 public class WebApplication {
 
@@ -9,7 +13,11 @@ public class WebApplication {
         Spark.staticFileLocation("/ui/dist/");
 
         try {
-            InjectionConfig injectionConfig = new InjectionConfig();
+            PropertiesConfig propertiesConfig = new PropertiesConfig();
+            Properties props = propertiesConfig.getProperties();
+            DatabaseConfig databaseConfig = new DatabaseConfig(props);
+            InjectionConfig injectionConfig = new InjectionConfig(props);
+
         } catch (Exception e) {
             e.printStackTrace();
         }
