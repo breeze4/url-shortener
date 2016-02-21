@@ -24,6 +24,6 @@ public class InjectionConfig {
         shortenRepository = new ShortenRepository(dataSource);
         shortenService = new ShortenService(shortenRepository);
         shortenController = new ShortenController(shortenService, objectMapper);
-        redirectController = new RedirectController(shortenService, objectMapper);
+        redirectController = new RedirectController(shortenService);
     }
 }

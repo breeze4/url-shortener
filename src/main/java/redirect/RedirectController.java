@@ -10,14 +10,10 @@ public class RedirectController {
 
     public static final String BASE_REDIRECT_URL = "/s";
     private final ShortenService service;
-    private final ObjectMapper om;
 
-    public RedirectController(ShortenService service, ObjectMapper om) {
+    public RedirectController(ShortenService service) {
         this.service = service;
-        this.om = om;
 
-        // TODO: turn this into a JsonResponseTransformer
-        // https://github.com/perwendel/spark
         Spark.get(BASE_REDIRECT_URL + "/:shortenedUrl", (req, res) -> {
             String shortenedUrl = req.params(":shortenedUrl");
             String originalUrl = service.redirect(shortenedUrl);
