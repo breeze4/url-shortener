@@ -3,8 +3,8 @@ My attempt at formulating an answer to the interview question "design a URL shor
 
 Built with:
  * [Spark](http://sparkjava.com/) as the web framework.
- * sql2o as a SQL library
- * NodeJS for testing
+ * [sql2o](http://www.sql2o.org/) as a SQL library
+ * NodeJS for integration testing
  * MySQL for relational storage
 
 Requirements:

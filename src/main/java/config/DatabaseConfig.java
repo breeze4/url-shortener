@@ -18,6 +18,18 @@ public class DatabaseConfig {
 
     private DataSource dataSource;
 
+    private static final String CREATE_SCHEMA = "CREATE SCHEMA IF NOT EXISTS URL;";
+    private static final String CREATE_SEQUENCE_TABLE = "" +
+            "CREATE TABLE IF NOT EXISTS URL.sequence (\n" +
+            "  id INT NOT NULL AUTO_INCREMENT PRIMARY KEY\n" +
+            ");";
+    private static final String CREATE_SHORTENED_URLS_TABLE = "" +
+            "CREATE TABLE IF NOT EXISTS url.shortened_urls (\n" +
+            "  shortened_url VARCHAR(8)   NOT NULL PRIMARY KEY,\n" +
+            "  original_url  VARCHAR(512) NOT NULL,\n" +
+            "  INDEX hashed_url (shortened_url)\n" +
+            ");";
+
     public DatabaseConfig(Properties props) {
         this(props.getProperty("dbJdbcUrl"),
                 props.getProperty("dbUser"),
@@ -39,9 +51,14 @@ public class DatabaseConfig {
 
             // assign
             dataSource = cpds;
+            Connection connection = dataSource.getConnection();
             System.out.println("Connection established to: " +
-                    "database: " + dataSource.getConnection().getMetaData().getDatabaseProductName() +
-                    " version: " + dataSource.getConnection().getMetaData().getDatabaseProductVersion());
+                    "database: " + connection.getMetaData().getDatabaseProductName() +
+                    " version: " + connection.getMetaData().getDatabaseProductVersion());
+
+            connection.prepareStatement(CREATE_SCHEMA).execute();
+            connection.prepareStatement(CREATE_SEQUENCE_TABLE).execute();
+            connection.prepareStatement(CREATE_SHORTENED_URLS_TABLE).execute();
         } catch (Exception e) {
             e.printStackTrace();
             dataSource = null;
