@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "pretest": "mvn package && start /b java -jar target/url-shortener-1.0.0.jar",
     "test": "artillery run src/test/artillery/basicLoadTest.json && node src/test/it/shorten_tests.js  && node src/test/it/redirect_tests.js"
   },
   "repository": {
