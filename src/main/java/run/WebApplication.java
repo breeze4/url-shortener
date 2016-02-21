@@ -6,7 +6,6 @@ import config.PropertiesConfig;
 import spark.Spark;
 import utils.NotFoundException;
 
-import javax.sql.DataSource;
 import java.util.Properties;
 
 public class WebApplication {
