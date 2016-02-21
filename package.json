@@ -4,8 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "pretest": "mvn package && start /b java -jar target/url-shortener-1.0.0.jar",
-    "test": "artillery run src/test/artillery/basicLoadTest.json && node src/test/it/shorten_tests.js  && node src/test/it/redirect_tests.js"
+    "prestart": "mvn package",
+    "start": "start /b java -jar target/url-shortener-1.0.0.jar",
+    "test": "artillery run src/test/artillery/basicLoadTest.json && node src/test/it/shorten_tests.js  && node src/test/it/redirect_tests.js",
+    "posttest": "jps | grep 'url-shortener' | cut -d' ' -f1 > tmpFile & set /p pid= < tmpFile & del tmpFile & kill -f %pid%"
   },
   "repository": {
     "type": "git",
