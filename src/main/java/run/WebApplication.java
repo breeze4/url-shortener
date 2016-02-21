@@ -4,6 +4,7 @@ import config.DatabaseConfig;
 import config.InjectionConfig;
 import config.PropertiesConfig;
 import spark.Spark;
+import utils.NotFoundException;
 
 import javax.sql.DataSource;
 import java.util.Properties;
@@ -22,6 +23,11 @@ public class WebApplication {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        Spark.exception(NotFoundException.class, (e, request, response) -> {
+            response.status(404);
+            response.body("Resource not found");
+        });
     }
 
 }
