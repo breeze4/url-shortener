@@ -23,6 +23,7 @@ public class ShortenController {
 
             ShortenResponse response = new ShortenResponse(originalUrl, shortenedUrl);
             res.header("Content-Type", "application/json;charset=utf-8");
+            res.status(201);
             return om.writeValueAsString(response);
         });
     }

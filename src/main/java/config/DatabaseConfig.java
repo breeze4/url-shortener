@@ -12,7 +12,6 @@ import java.util.Properties;
 
 public class DatabaseConfig {
 
-    private final String dbUrl;
     private final String dbUser;
     private final String dbPassword;
     private final String dbJdbcUrl;
@@ -27,7 +26,6 @@ public class DatabaseConfig {
 
     public DatabaseConfig(String dbJdbcUrl, String dbUser, String dbPassword) {
         this.dbJdbcUrl = dbJdbcUrl;
-        this.dbUrl = dbJdbcUrl + "?user=" + dbUser + "&password=" + dbPassword;
         this.dbUser = dbUser;
         this.dbPassword = dbPassword;
 
