@@ -28,5 +28,5 @@ function testNewShorten() {
         assert(shortenedUrl && shortenedUrl.shortenedUrl);
     });
 
-    console.log("test complete")
+    console.log("shorten test complete");
 }
