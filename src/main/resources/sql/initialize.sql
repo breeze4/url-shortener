@@ -1,0 +1,11 @@
+CREATE SCHEMA IF NOT EXISTS URL;
+
+CREATE TABLE IF NOT EXISTS URL.sequence (
+  id INT NOT NULL AUTO_INCREMENT PRIMARY KEY
+);
+
+CREATE TABLE IF NOT EXISTS url.shortened_urls (
+  shortened_url VARCHAR(8)   NOT NULL PRIMARY KEY,
+  original_url  VARCHAR(512) NOT NULL,
+  INDEX hashed_url (shortened_url)
+);

@@ -1,3 +1,6 @@
 /target
 /dependency-reduced-pom.xml
 /.idea/workspace.xml
+/.idea/dataSources.xml
+/.idea/dataSources.local.xml
+/.idea/dataSources.ids

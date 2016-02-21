@@ -17,14 +17,13 @@ public class DatabaseConfig {
     private final String dbPassword;
     private final String dbJdbcUrl;
 
-    private ComboPooledDataSource dataSource;
+    private DataSource dataSource;
 
     public DatabaseConfig(Properties props) {
         this(props.getProperty("dbJdbcUrl"),
                 props.getProperty("dbUser"),
                 props.getProperty("dbPassword"));
     }
-
 
     public DatabaseConfig(String dbJdbcUrl, String dbUser, String dbPassword) {
         this.dbJdbcUrl = dbJdbcUrl;
@@ -33,11 +32,15 @@ public class DatabaseConfig {
         this.dbPassword = dbPassword;
 
         try {
-            dataSource = new ComboPooledDataSource();
-            dataSource.setDriverClass("com.mysql.jdbc.Driver");
-            dataSource.setJdbcUrl(this.dbJdbcUrl);
-            dataSource.setUser(this.dbUser);
-            dataSource.setPassword(this.dbPassword);
+            // configure
+            ComboPooledDataSource cpds = new ComboPooledDataSource();
+            cpds.setDriverClass("com.mysql.jdbc.Driver");
+            cpds.setJdbcUrl(this.dbJdbcUrl);
+            cpds.setUser(this.dbUser);
+            cpds.setPassword(this.dbPassword);
+
+            // assign
+            dataSource = cpds;
             System.out.println("Connection established to: " +
                     "database: " + dataSource.getConnection().getMetaData().getDatabaseProductName() +
                     " version: " + dataSource.getConnection().getMetaData().getDatabaseProductVersion());
@@ -61,5 +64,9 @@ public class DatabaseConfig {
 //            System.out.println("SQLState: " + ex.getSQLState());
 //            System.out.println("VendorError: " + ex.getErrorCode());
 //        }
+    }
+
+    public DataSource dataSource() {
+        return dataSource;
     }
 }
