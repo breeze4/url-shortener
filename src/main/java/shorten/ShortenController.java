@@ -5,7 +5,7 @@ import spark.Spark;
 
 public class ShortenController {
 
-    private static final String BASE_URL = "/shorten";
+    public static final String BASE_SHORTEN_URL = "/shorten";
     private final ShortenService service;
     private final ObjectMapper om;
 
@@ -15,7 +15,7 @@ public class ShortenController {
 
         // TODO: turn this into a JsonResponseTransformer
         // https://github.com/perwendel/spark
-        Spark.post(BASE_URL + "/", (req, res) -> {
+        Spark.post(BASE_SHORTEN_URL + "/", (req, res) -> {
             String body = req.body();
             ShortenRequest request = om.readerFor(ShortenRequest.class).readValue(body);
             String originalUrl = request.getOriginalUrl();

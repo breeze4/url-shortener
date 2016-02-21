@@ -1,6 +1,7 @@
 package config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import redirect.RedirectController;
 import shorten.ShortenController;
 import shorten.ShortenRepository;
 import shorten.ShortenService;
@@ -15,6 +16,7 @@ public class InjectionConfig {
     private final ShortenController shortenController;
     private final DataSource dataSource;
     private final ShortenRepository shortenRepository;
+    private final RedirectController redirectController;
 
     public InjectionConfig(Properties props, DatabaseConfig databaseConfig) {
         dataSource = databaseConfig.dataSource();
@@ -22,5 +24,6 @@ public class InjectionConfig {
         shortenRepository = new ShortenRepository(dataSource);
         shortenService = new ShortenService(shortenRepository);
         shortenController = new ShortenController(shortenService, objectMapper);
+        redirectController = new RedirectController(shortenService, objectMapper);
     }
 }

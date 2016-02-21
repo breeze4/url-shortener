@@ -16,6 +16,21 @@ public class ShortenRepository {
         db = new Sql2o(dataSource);
     }
 
+    public String getOriginalUrl(String shortenedUrl) {
+        String sql = "SELECT shortened_url, original_url " +
+                "FROM url.shortened_urls u " +
+                "WHERE u.shortened_url = :shortenedUrl";
+
+        try (Connection con = db.open()) {
+            ShortenedUrl url = con.createQuery(sql)
+                    .addColumnMapping("shortened_url", "shortenedUrl")
+                    .addColumnMapping("original_url", "originalUrl")
+                    .addParameter("shortenedUrl", shortenedUrl)
+                    .executeAndFetchFirst(ShortenedUrl.class);
+            return url.getOriginalUrl();
+        }
+    }
+
     public boolean shortenedUrlExists(String shortenedUrl) {
         String sql = "SELECT shortened_url, original_url " +
                 "FROM url.shortened_urls u " +

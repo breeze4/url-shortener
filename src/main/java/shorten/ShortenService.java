@@ -21,4 +21,9 @@ public class ShortenService {
         }
         return encodedUrl;
     }
+
+    public String redirect(String shortenedUrl) {
+        String originalUrl = shortenRepository.getOriginalUrl(shortenedUrl);
+        return originalUrl;
+    }
 }
