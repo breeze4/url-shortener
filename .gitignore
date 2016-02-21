@@ -3,5 +3,6 @@
 /.idea/workspace.xml
 /.idea/dataSources.xml
 /.idea/dataSources.local.xml
+/artillery_report_*.json
 /.idea/dataSources.ids
 /node_modules

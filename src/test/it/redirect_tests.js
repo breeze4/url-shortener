@@ -35,6 +35,8 @@ function testRedirect() {
             method: 'GET',
             uri: originalUrl
         }, function (error, response, body) {
+            // this will be the result of a redirect to some 404 error page
+            // check that this is the original URL in the href
             assert(response.request.href, expectedOriginalUrl);
         });
     });
